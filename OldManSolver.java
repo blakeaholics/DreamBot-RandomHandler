@@ -10,7 +10,12 @@ import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 
 import java.awt.*;
-
+/**
+ * OldManSolver - solves Mysterious Old Man
+ *
+ * @author holic
+ * @url https://github.com/blakeaholics/DreamBot-RandomHandler
+ */
 public class OldManSolver extends RandomSolver {
 
     public OldManSolver() {

@@ -8,7 +8,12 @@ import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 
 import java.awt.*;
-
+/**
+ * DrunkenDwarfSolver - solves Drunken Dwarf
+ *
+ * @author holic
+ * @url https://github.com/blakeaholics/DreamBot-RandomHandler
+ */
 public class DrunkenDwarfSolver extends RandomSolver {
 
     public DrunkenDwarfSolver() {

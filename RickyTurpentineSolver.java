@@ -8,7 +8,12 @@ import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 
 import java.awt.*;
-
+/**
+ * RickyTurpentineSolver - solves Ricky Turpentine
+ *
+ * @author holic
+ * @url https://github.com/blakeaholics/DreamBot-RandomHandler
+ */
 public class RickyTurpentineSolver extends RandomSolver {
 
     public RickyTurpentineSolver() {

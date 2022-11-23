@@ -7,7 +7,12 @@ import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 
 import java.awt.*;
-
+/**
+ * GenieSolver - solves Genie, lamp solving will be added soon
+ *
+ * @author holic
+ * @url https://github.com/blakeaholics/DreamBot-RandomHandler
+ */
 public class GenieSolver extends RandomSolver {
 
     public GenieSolver() {

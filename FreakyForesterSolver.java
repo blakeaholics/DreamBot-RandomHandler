@@ -15,7 +15,12 @@ import org.dreambot.api.wrappers.interactive.NPC;
 import org.dreambot.api.wrappers.items.GroundItem;
 
 import java.awt.*;
-
+/**
+ * FreakyForesterSolver - solves Freaky Forester with a commented out option to exit your script if it gets stuck. You take care of the rest.
+ *
+ * @author holic
+ * @url https://github.com/blakeaholics/DreamBot-RandomHandler
+ */
 public class FreakyForesterSolver extends RandomSolver {
     Area areaFreak = new Area(2589, 4785, 2616, 4763);
     private int tailID = 0;
@@ -152,7 +157,7 @@ public class FreakyForesterSolver extends RandomSolver {
             return 1;
         }
 
-        /*if (script.config.getClueTile().distance() >= 45) {
+        /*if (script.getScriptTile().distance() >= 45) {
             RandomHandler.log("Failed to solve Freaky Forester!", "FreakyForesterSolver");
             Sleep.sleep(350, 2550);
             RandomHandler.log("Attempting to get the hell out of here...", "FreakyForesterSolver");
@@ -169,7 +174,7 @@ public class FreakyForesterSolver extends RandomSolver {
                     
                     return -1;
                 }
-            } else if (script.config.getClueTile().distance() >= 45) {
+            } else if (script.getScriptTile().distance() >= 45) {
                 RandomHandler.log("Completely failed Freaky Forester, ending...", "FreakyForesterSolver");
                 script.config.setEnd(true);
             }

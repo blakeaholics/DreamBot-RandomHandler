@@ -9,7 +9,12 @@ import org.dreambot.api.wrappers.interactive.NPC;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * DismissSolver - Dismisses the randoms I haven't solved yet
+ *
+ * @author holic
+ * @url https://github.com/blakeaholics/DreamBot-RandomHandler
+ */
 public class DismissSolver extends RandomSolver {
     String[] randoms = {"Bee keeper", "Capt' Arnav", "Dunce", "Evil Bob", "Flippa", "Tilt", "Giles", "Jekyll and Hyde", "Leo", "Miles", "Molly", "Mr. Mordaut", "Niles", "Pillory Guard", "Postie Pete", "Prison Pete", "Quiz Master", "Sandwich lady", "Sergeant Damien", "Servant", "Strange plant"};
     ArrayList<String> lstRandoms = new ArrayList(Arrays.asList(randoms));
