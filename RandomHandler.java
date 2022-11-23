@@ -12,7 +12,7 @@ import java.awt.*;
  * @version 1.1
  * @url https://github.com/blakeaholics/DreamBot-RandomHandler
  */
- 
+
 public class RandomHandler {
 
     public static void loadRandoms() {
