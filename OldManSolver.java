@@ -1,5 +1,3 @@
-package com.holic.alclueholic.randoms;
-
 import org.dreambot.api.Client;
 import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.methods.dialogues.Dialogues;
@@ -10,6 +8,7 @@ import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 
 import java.awt.*;
+
 /**
  * OldManSolver - solves Mysterious Old Man
  *

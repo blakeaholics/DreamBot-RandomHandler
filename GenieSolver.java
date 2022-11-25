@@ -1,5 +1,6 @@
 import org.dreambot.api.Client;
 import org.dreambot.api.methods.Calculations;
+import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.interactive.NPCs;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.randoms.RandomSolver;
@@ -7,6 +8,7 @@ import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 
 import java.awt.*;
+
 /**
  * GenieSolver - solves Genie, lamp solving will be added soon
  *
@@ -57,9 +59,12 @@ public class GenieSolver extends RandomSolver {
                 RandomHandler.powerThroughDialogue();
                 Sleep.sleep(550, 2500);
             }
+            if (Inventory.contains("Lamp"))
+                return RandomHandler.useLamp() ? -1 : 1;
         } else {
             return -1;
         }
         return 1;
     }
+
 }

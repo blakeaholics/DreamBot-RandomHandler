@@ -15,6 +15,7 @@ import org.dreambot.api.wrappers.interactive.NPC;
 import org.dreambot.api.wrappers.items.GroundItem;
 
 import java.awt.*;
+
 /**
  * FreakyForesterSolver - solves Freaky Forester with a commented out option to exit your script if it gets stuck. You take care of the rest.
  *

@@ -8,6 +8,7 @@ import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 
 import java.awt.*;
+
 /**
  * RickyTurpentineSolver - solves Ricky Turpentine
  *

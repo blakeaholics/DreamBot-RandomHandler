@@ -9,6 +9,7 @@ import org.dreambot.api.wrappers.interactive.NPC;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 /**
  * DismissSolver - Dismisses the randoms I haven't solved yet
  *
