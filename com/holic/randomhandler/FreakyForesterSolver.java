@@ -1,3 +1,5 @@
+package com.holic;
+
 import org.dreambot.api.Client;
 import org.dreambot.api.data.GameState;
 import org.dreambot.api.methods.Calculations;
@@ -63,7 +65,9 @@ public class FreakyForesterSolver extends RandomSolver {
                 Sleep.sleep(ran * 1000L);
             }
             Sleep.sleep(350, 850);
-            if (forester.interact()) {
+            return 1;
+		}
+            if (!areaFreak.contains(Players.getLocal().getTile()) && forester.interact()) {
                 Sleep.sleep(1450, 3850);
                 Sleep.sleepUntil(Dialogues::inDialogue, 10000);
                 RandomHandler.powerThroughDialogue();
@@ -74,9 +78,9 @@ public class FreakyForesterSolver extends RandomSolver {
                 }
                 Sleep.sleep(2000, 5500);
                 Sleep.sleepWhile(() -> Client.getGameState().equals(GameState.LOADING), Calculations.random(8500, 11000));
-            }
             return 1;
-        }
+            }
+        
 
         //In Freak's realm but no assignment yet
         if (areaFreak.contains(Players.getLocal().getTile()) && tailID == 0) {
@@ -140,16 +144,33 @@ public class FreakyForesterSolver extends RandomSolver {
             if (forester.interact() && !leave) {
                 Sleep.sleep(550, 2500);
                 Sleep.sleepWhile(() -> Players.getLocal().isMoving(), 10000);
-                Sleep.sleepUntil(Dialogues::inDialogue, 10000);
+                Sleep.sleepUntil(() -> Dialogues.getNPCDialogue()!= null, 10000);
                 RandomHandler.powerThroughDialogue();
                 leave = true;
+                Sleep.sleep(550, 2500);
             }
+			if (Dialogues.inDialogue() 
+				&& (Dialogues.getOptions() != null || Dialogues.canContinue())) {
+				leave = false;
+				RandomHandler.log("Something went wrong in the process, restarting...", "FreakyForesterSolver");
+			}
+			
             if (leave) {
                 GameObject portal = GameObjects.closest("Portal", "Exit portal");
                 if (portal != null && portal.interact()) {
-                    RandomHandler.log("And getting the hell out of here!", "FreakyForesterSolver");
                     Sleep.sleep(550, 2500);
                     Sleep.sleepWhile(() -> Players.getLocal().isMoving(), 10000);
+					
+			if (Dialogues.inDialogue() 
+				&& (Dialogues.getOptions() != null || Dialogues.canContinue())) {
+					if (Calculations.random(10) > 2) {
+				leave = false;
+				RandomHandler.log("Something went wrong in the process, restarting...", "FreakyForesterSolver");
+					} else {
+				RandomHandler.log("Something went wrong in, let's bail", "FreakyForesterSolver");
+					}
+			}
+                    RandomHandler.log("And getting the hell out of here!", "FreakyForesterSolver");
 
                     Sleep.sleep(350, 850);
                     return -1;

@@ -1,3 +1,5 @@
+package com.holic;
+
 import org.dreambot.api.Client;
 import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.methods.interactive.NPCs;

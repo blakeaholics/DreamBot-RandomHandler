@@ -1,3 +1,5 @@
+package com.holic;
+
 import org.dreambot.api.Client;
 import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.methods.container.impl.Inventory;
@@ -18,7 +20,7 @@ import java.awt.*;
  * RandomHandler - A collection of random event solvers
  *
  * @author holic
- * @version 1.1
+ * @version 1.3
  * @url https://github.com/blakeaholics/DreamBot-RandomHandler
  */
 
@@ -33,6 +35,7 @@ public class RandomHandler {
         Client.getInstance().getRandomManager().registerSolver(new FreakyForesterSolver());
         Client.getInstance().getRandomManager().registerSolver(new OldManSolver());
         Client.getInstance().getRandomManager().registerSolver(new DrunkenDwarfSolver());
+        Client.getInstance().getRandomManager().registerSolver(new FrogSolver());
     }
 
     public static void loadSolver(Event solver) {
@@ -54,6 +57,9 @@ public class RandomHandler {
                 break;
             case DRUNKEN_DWARF:
                 Client.getInstance().getRandomManager().registerSolver(new DrunkenDwarfSolver());
+                break;
+            case FROG:
+                Client.getInstance().getRandomManager().registerSolver(new FrogSolver());
                 break;
         }
     }
@@ -78,6 +84,9 @@ public class RandomHandler {
             case DRUNKEN_DWARF:
                 Client.getInstance().getRandomManager().unregisterSolver("DrunkenDwarfSolver");
                 break;
+            case FROG:
+                Client.getInstance().getRandomManager().unregisterSolver("FrogSolver");
+                break;
         }
     }
 
@@ -90,6 +99,7 @@ public class RandomHandler {
         Client.getInstance().getRandomManager().unregisterSolver("FreakyForesterSolver");
         Client.getInstance().getRandomManager().unregisterSolver("OldManSolver");
         Client.getInstance().getRandomManager().unregisterSolver("RickyTurpentineSolver");
+        Client.getInstance().getRandomManager().unregisterSolver("FrogSolver");
     }
 
     public static boolean useLamp() {
@@ -186,6 +196,6 @@ public class RandomHandler {
     }
 
     enum Event {
-        DISMISS, GENIE, RICKY_TURPENTINE, FREAKY_FORESTER, OLD_MAN, DRUNKEN_DWARF
+        DISMISS, GENIE, RICKY_TURPENTINE, FREAKY_FORESTER, OLD_MAN, DRUNKEN_DWARF, FROG
     }
 }
