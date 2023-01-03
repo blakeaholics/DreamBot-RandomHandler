@@ -1,4 +1,4 @@
-package com.holic;
+package com.holic.randomhandler;
 
 import org.dreambot.api.Client;
 import org.dreambot.api.methods.Calculations;
