@@ -24,10 +24,14 @@ public class FrogSolver extends RandomSolver {
         super("FrogSolver");
     }
 
-    @Override
+ @Override
     public boolean shouldExecute() {
-        NPC frogPrince = NPCs.closest(5833);//Just need to click positive answer    
-        return (frogPrince != null && frogPrince.getInteractingCharacter() != null && frogPrince.getInteractingCharacter().equals(Players.getLocal()));
+        NPC froggyFrog = NPCs.closest(5429);//Just need to click positive answer
+        NPC froggyPrince = NPCs.closest(5434, 5435);
+        if ((froggyFrog != null && froggyFrog.getInteractingCharacter() != null && froggyFrog.getInteractingCharacter().equals(Players.getLocal()))
+                || (froggyPrince != null && froggyPrince.getInteractingCharacter() != null && froggyPrince.getInteractingCharacter().equals(Players.getLocal())))
+            return true;
+        return false;
     }
 
     @Override
@@ -45,7 +49,7 @@ public class FrogSolver extends RandomSolver {
     @Override
     public int onLoop() {
         int ran = Calculations.random(1, 6);
-        NPC froggyFrog = NPCs.closest(375, 376);//Just need to click ok
+        NPC froggyFrog = NPCs.closest(5429);//Just need to click ok
         NPC froggyPrince = NPCs.closest(5434, 5435);
         froggyPrince = (froggyPrince == null ? NPCs.closest("Frog Prince", "Frog Princess") : froggyPrince);
 
