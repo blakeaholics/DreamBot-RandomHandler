@@ -20,14 +20,18 @@ import java.util.Arrays;
  */
 public class FrogSolver extends RandomSolver {
 
+    private final Integer[] FROGS = {5903, 5429, 5901, 5900, 5899, 5902};
+    private final int MAIN_FROG = 5900;
+    private final Integer[] ROYAL_FROGS = {5434, 5435};
+
     public FrogSolver() {
         super("FrogSolver");
     }
 
     @Override
     public boolean shouldExecute() {
-        NPC froggyFrog = NPCs.closest(5903, 5429, 5901, 5900, 5899, 5902);// Any of the frog chars
-        NPC froggyPrince = NPCs.closest(5434, 5435);
+        NPC froggyFrog = NPCs.closest(FROGS);// Any of the frog chars
+        NPC froggyPrince = NPCs.closest(ROYAL_FROGS);
         return (froggyFrog != null && froggyFrog.getInteractingCharacter() != null && froggyFrog.getInteractingCharacter().equals(Players.getLocal()))
                 || (froggyPrince != null && froggyPrince.getInteractingCharacter() != null && froggyPrince.getInteractingCharacter().equals(Players.getLocal()));
     }
@@ -47,8 +51,8 @@ public class FrogSolver extends RandomSolver {
     @Override
     public int onLoop() {
         int ran = Calculations.random(1, 6);
-        NPC froggyFrog = NPCs.closest(5900);//Just the main frog
-        NPC froggyPrince = NPCs.closest(5434, 5435);
+        NPC froggyFrog = NPCs.closest(MAIN_FROG);//Just the main frog
+        NPC froggyPrince = NPCs.closest(ROYAL_FROGS);
         froggyPrince = (froggyPrince == null ? NPCs.closest("Frog Prince", "Frog Princess") : froggyPrince);
 
         if (froggyFrog != null) {

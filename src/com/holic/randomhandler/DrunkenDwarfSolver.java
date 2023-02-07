@@ -19,14 +19,17 @@ import java.awt.*;
  */
 public class DrunkenDwarfSolver extends RandomSolver {
 
+    private final Integer[] DWARF = {322, 2429, 4305};
+    private final String STRING_DWARF = "Drunken Dwarf";
+
     public DrunkenDwarfSolver() {
         super("DrunkenDwarfSolver");
     }
 
     @Override
     public boolean shouldExecute() {
-        NPC dwarf = NPCs.closest(322, 2429, 4305);//Just need to click ok
-        dwarf = (dwarf == null ? NPCs.closest("Drunken Dwarf") : dwarf);
+        NPC dwarf = NPCs.closest(DWARF);//Just need to click ok
+        dwarf = (dwarf == null ? NPCs.closest(STRING_DWARF) : dwarf);
         return (dwarf != null && dwarf.getInteractingCharacter() != null && dwarf.getInteractingCharacter().equals(Players.getLocal()));
     }
 
@@ -44,8 +47,8 @@ public class DrunkenDwarfSolver extends RandomSolver {
 
     @Override
     public int onLoop() {
-        NPC dwarf = NPCs.closest(322, 2429, 4305);//Just need to click ok
-        dwarf = (dwarf == null ? NPCs.closest("Drunken Dwarf") : dwarf);
+        NPC dwarf = NPCs.closest(DWARF);//Just need to click ok
+        dwarf = (dwarf == null ? NPCs.closest(STRING_DWARF) : dwarf);
         if (dwarf != null) {
             if (Calculations.random(2) == 1) {
                 int ran = Calculations.random(1, 6);

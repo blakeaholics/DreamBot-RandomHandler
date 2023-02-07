@@ -37,7 +37,7 @@ public class BeekeeperSolver extends RandomSolver {
     private final int WIDGET = 420;
     private final int beekeeperOverworld = 6747;
     private final int beekeeperInstance = 3235;
-    private Area areaHives = new Area(0, 0, 0, 0);
+    private final Area areaHives = new Area(0, 0, 0, 0);
 
     public BeekeeperSolver() {
         super("BeekeeperSolver");

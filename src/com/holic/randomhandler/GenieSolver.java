@@ -19,14 +19,17 @@ import java.awt.*;
  */
 public class GenieSolver extends RandomSolver {
 
+    private final Integer[] GENIE = {326, 327, 4738};
+    private final String STRING_GENIE = "Genie";
+
     public GenieSolver() {
         super("IDreamOfGenieSolver");
     }
 
     @Override
     public boolean shouldExecute() {
-        NPC genie = NPCs.closest(326, 327, 4738);
-        genie = (genie == null ? NPCs.closest("Genie") : genie);
+        NPC genie = NPCs.closest(GENIE);
+        genie = (genie == null ? NPCs.closest(STRING_GENIE) : genie);
         return (genie != null && genie.getInteractingCharacter() != null && genie.getInteractingCharacter().equals(Players.getLocal()));
     }
 
@@ -45,8 +48,8 @@ public class GenieSolver extends RandomSolver {
     @Override
     public int onLoop() {
         int ran = Calculations.random(1, 6);
-        NPC genie = NPCs.closest(326, 327, 4738);
-        genie = (genie == null ? NPCs.closest("Genie") : genie);
+        NPC genie = NPCs.closest(GENIE);
+        genie = (genie == null ? NPCs.closest(STRING_GENIE) : genie);
         if (genie != null) {
             RandomHandler.log("We've got a Genie!", "GenieSolver");
             Sleep.sleep(350, 850);
@@ -61,8 +64,7 @@ public class GenieSolver extends RandomSolver {
                 RandomHandler.powerThroughDialogue();
                 Sleep.sleep(550, 2500);
             }
-            if (Inventory.contains("Lamp"))
-                return RandomHandler.useLamp() ? -1 : 1;
+            if (Inventory.contains("Lamp")) return RandomHandler.useLamp() ? -1 : 1;
         } else {
             return -1;
         }

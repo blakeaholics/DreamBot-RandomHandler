@@ -26,6 +26,9 @@ import java.awt.*;
 
 public class RandomHandler {
 
+    private static final int WIDGET_LAMP = 240;
+    private static final int WIDGET_LAMP_ENTER = 26;
+
     public static void loadRandoms() {
         Client.getInstance().getRandomManager().disableSolver(RandomEvent.DISMISS);
         Client.getInstance().getRandomManager().disableSolver(RandomEvent.GENIE);
@@ -111,8 +114,7 @@ public class RandomHandler {
     }
 
     public static boolean useLamp() {
-        if (!Inventory.contains("Lamp"))
-            return false;
+        if (!Inventory.contains("Lamp")) return false;
 
         if (!Tabs.isOpen(Tab.INVENTORY)) {
             Tabs.open(Tab.INVENTORY);
@@ -123,8 +125,8 @@ public class RandomHandler {
             log("I love lamp. I love lamp! I love lamp!");
             if (Inventory.interact("Lamp", "Rub")) {
                 Sleep.sleep(1350, 2500);
-                Sleep.sleepUntil(() -> Widgets.getWidget(240) != null, Calculations.random(6000, 9000));
-                Widget skills = Widgets.getWidget(240);
+                Sleep.sleepUntil(() -> Widgets.getWidget(WIDGET_LAMP) != null, Calculations.random(6000, 9000));
+                Widget skills = Widgets.getWidget(WIDGET_LAMP);
                 WidgetChild skill = null;
                 if (skills != null) {
                     switch (Calculations.random(5)) {
@@ -163,7 +165,7 @@ public class RandomHandler {
                         skill = skill.getChild(4);
                         if (skill.interact()) {
                             Sleep.sleep(550, 1500);
-                            WidgetChild enter = skills.getChild(26).getChild(0);
+                            WidgetChild enter = skills.getChild(WIDGET_LAMP_ENTER).getChild(0);
                             if (enter != null) {
                                 if (enter.interact()) {
                                     log("(We've got a lamp and we're using it)");

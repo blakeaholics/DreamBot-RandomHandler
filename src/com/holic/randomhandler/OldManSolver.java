@@ -19,14 +19,17 @@ import java.awt.*;
  */
 public class OldManSolver extends RandomSolver {
 
+    private final Integer[] OLD_MAN = {2830, 6742, 6750, 6751, 6752, 6753};
+    private final String STRING_OLD_MAN = "Mysterious Old Man";
+
     public OldManSolver() {
         super("OldManSolver");
     }
 
     @Override
     public boolean shouldExecute() {
-        NPC oldMan = NPCs.closest(2830, 6742, 6750, 6751, 6752, 6753);
-        oldMan = (oldMan == null ? NPCs.closest("Mysterious Old Man") : oldMan);
+        NPC oldMan = NPCs.closest(OLD_MAN);
+        oldMan = (oldMan == null ? NPCs.closest(STRING_OLD_MAN) : oldMan);
         return (oldMan != null && oldMan.getInteractingCharacter() != null && oldMan.getInteractingCharacter().equals(Players.getLocal()));
     }
 
@@ -44,8 +47,8 @@ public class OldManSolver extends RandomSolver {
 
     @Override
     public int onLoop() {
-        NPC oldMan = NPCs.closest(2830, 6742, 6750, 6751, 6752, 6753);
-        oldMan = (oldMan == null ? NPCs.closest("Mysterious Old Man") : oldMan);
+        NPC oldMan = NPCs.closest(OLD_MAN);
+        oldMan = (oldMan == null ? NPCs.closest(STRING_OLD_MAN) : oldMan);
         if (oldMan != null) {
             if (Dialogues.inDialogue()) {
                 if (!Dialogues.getNPCDialogue().contains("mime") && !Dialogues.getNPCDialogue().contains("maze")) {

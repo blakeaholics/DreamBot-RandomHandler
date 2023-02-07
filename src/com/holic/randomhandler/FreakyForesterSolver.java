@@ -27,6 +27,8 @@ import java.awt.*;
  * @url https://github.com/blakeaholics/DreamBot-RandomHandler
  */
 public class FreakyForesterSolver extends RandomSolver implements ChatListener {
+    private final int freakOverworld = 6748;
+    private final int freakInstance = 372;
     Area areaFreak = new Area(2589, 4785, 2616, 4763);
     private int tailID = 0;
     private boolean leave = false;
@@ -37,7 +39,7 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
 
     @Override
     public boolean shouldExecute() {
-        NPC forester = NPCs.closest(372);
+        NPC forester = NPCs.closest(freakOverworld, freakInstance);
         forester = (forester == null ? NPCs.closest("Freaky Forester") : forester);
         return (forester != null && forester.getInteractingCharacter() != null && forester.getInteractingCharacter().equals(Players.getLocal()))
                 || areaFreak.contains(Players.getLocal().getTile());
@@ -57,7 +59,7 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
 
     @Override
     public int onLoop() {
-        NPC forester = NPCs.closest(372);
+        NPC forester = NPCs.closest(freakOverworld, freakInstance);
         forester = (forester == null ? NPCs.closest("Freaky Forester") : forester);
         //Before entering Freak's realm
         if (!areaFreak.contains(Players.getLocal().getTile())) {
@@ -84,11 +86,11 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
 
         //In Freak's realm but no assignment yet
         if (areaFreak.contains(Players.getLocal().getTile()) && tailID == 0) {
-            forester = NPCs.closest(372);
+            forester = NPCs.closest(freakInstance);
             forester = (forester == null ? NPCs.closest("Freaky Forester") : forester);
             RandomHandler.log("Lets find out what he wants...", "FreakyForesterSolver");
             if (forester.interact()) {
-                Sleep.sleep(1450, 3850);
+                Sleep.sleep(550, 3850);
                 Sleep.sleepUntil(Dialogues::inDialogue, 10000);//Maybe pull this if out of forester if?
                 if (Dialogues.getNPCDialogue().contains("tail")) {
                     String tailFeathers = Dialogues.getNPCDialogue().split("kill")[1].split("tail")[0];
@@ -166,6 +168,12 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
                             RandomHandler.log("Something went wrong in the process, restarting...", "FreakyForesterSolver");
                         } else {
                             RandomHandler.log("Something went wrong in, let's bail", "FreakyForesterSolver");
+                            if (Dialogues.getOptions() != null & Dialogues.chooseFirstOptionContaining("leave", "Leave")) {
+                                Sleep.sleep(1550, 4500);
+                                Sleep.sleepWhile(() -> Client.getGameState().equals(GameState.LOADING), 10000);
+                            }
+                            leave = true;
+                            return 1;
                         }
                     }
                     RandomHandler.log("And getting the hell out of here!", "FreakyForesterSolver");
