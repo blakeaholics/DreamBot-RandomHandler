@@ -141,11 +141,12 @@ public class BeekeeperSolver extends RandomSolver {
                     }
 
 
-                    if (successCount == 4) {
+                    if (successCount >= 4) {
                         RandomHandler.log("Successfully moved all pieces!", "BeekeeperSolver");
                         if (!Widgets.getWidgetChildrenContainingText("CONFIRM").isEmpty()) {
                             if (!Widgets.getWidgetChildrenContainingText("CONFIRM").get(0).interact()) {
                                 Sleep.sleep(350, 1850);
+                                RandomHandler.increaseSolvedCount();
                                 return -1;
                             }
                         }

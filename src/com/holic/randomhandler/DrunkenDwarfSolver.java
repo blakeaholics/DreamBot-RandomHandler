@@ -63,6 +63,7 @@ public class DrunkenDwarfSolver extends RandomSolver {
                 RandomHandler.powerThroughDialogue();
 
                 Sleep.sleep(350, 850);
+                RandomHandler.increaseSolvedCount();
                 return -1;
             }
         }

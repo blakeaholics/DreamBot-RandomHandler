@@ -86,6 +86,9 @@ public class OldManSolver extends RandomSolver {
                 if (oldMan.interact()) {
                     Sleep.sleep(450, 1850);
                     Sleep.sleepUntil(Dialogues::inDialogue, 10000);
+                    if (Calculations.random(3) == 1)
+                        RandomHandler.powerThroughDialogue();
+                    RandomHandler.increaseSolvedCount();
                 }
             }
         }

@@ -179,6 +179,7 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
                     RandomHandler.log("And getting the hell out of here!", "FreakyForesterSolver");
 
                     Sleep.sleep(350, 850);
+                    RandomHandler.increaseSolvedCount();
                     return -1;
                 }
             }

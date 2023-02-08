@@ -8,7 +8,6 @@ import org.dreambot.api.methods.tabs.Tab;
 import org.dreambot.api.methods.tabs.Tabs;
 import org.dreambot.api.methods.widget.Widget;
 import org.dreambot.api.methods.widget.Widgets;
-import org.dreambot.api.randoms.GenieSolver;
 import org.dreambot.api.randoms.RandomEvent;
 import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
@@ -20,7 +19,7 @@ import java.awt.*;
  * RandomHandler - A collection of random event solvers
  *
  * @author holic
- * @version 1.7
+ * @version 1.75
  * @url https://github.com/blakeaholics/DreamBot-RandomHandler
  */
 
@@ -28,6 +27,7 @@ public class RandomHandler {
 
     private static final int WIDGET_LAMP = 240;
     private static final int WIDGET_LAMP_ENTER = 26;
+    private static int solvedCount = 0;
 
     public static void loadRandoms() {
         Client.getInstance().getRandomManager().disableSolver(RandomEvent.DISMISS);
@@ -170,6 +170,7 @@ public class RandomHandler {
                                 if (enter.interact()) {
                                     log("(We've got a lamp and we're using it)");
                                     Sleep.sleep(550, 1500);
+                                    increaseSolvedCount();
                                     return true;
                                 }
                             }
@@ -195,6 +196,14 @@ public class RandomHandler {
                 }
             }
         }
+    }
+
+    public static void increaseSolvedCount() {
+        solvedCount++;
+    }
+
+    public static int getSolvedCount() {
+        return solvedCount;
     }
 
     public static void log(String msg, String solver) {

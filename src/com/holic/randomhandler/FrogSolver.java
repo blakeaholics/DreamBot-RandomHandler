@@ -93,6 +93,7 @@ public class FrogSolver extends RandomSolver {
                     Sleep.sleepUntil(Dialogues::inDialogue, 10000);
                     RandomHandler.powerThroughDialogue();
                     Sleep.sleep(1350, 2850);
+                    RandomHandler.increaseSolvedCount();
                     return -1;
                 }
             }
