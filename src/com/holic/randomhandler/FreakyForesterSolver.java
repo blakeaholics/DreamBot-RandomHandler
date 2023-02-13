@@ -61,6 +61,56 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
     public int onLoop() {
         NPC forester = NPCs.closest(freakOverworld, freakInstance);
         forester = (forester == null ? NPCs.closest("Freaky Forester") : forester);
+
+        if (areaFreak.contains(Players.getLocal().getTile()) && Inventory.contains("Raw pheasant") || leave) {
+            if (!leave) {
+                forester = NPCs.closest(freakInstance);
+                forester = (forester == null ? NPCs.closest("Freaky Forester") : forester);
+                RandomHandler.log("Talking to the freak...", "FreakyForesterSolver");
+                if (forester.interact()) {
+                    Sleep.sleep(550, 2500);
+                    Sleep.sleepWhile(() -> Players.getLocal().isMoving(), 5000);
+                    Sleep.sleepUntil(() -> Dialogues.getNPCDialogue() != null, 10000);
+                    RandomHandler.powerThroughDialogue();
+                    leave = true;
+                    Sleep.sleep(550, 2500);
+                }
+                if (Dialogues.inDialogue()
+                        && (Dialogues.getOptions() != null || Dialogues.canContinue())) {
+                    leave = false;
+                    RandomHandler.log("Something went wrong in the process, restarting...", "FreakyForesterSolver");
+                }
+            } else {
+                GameObject portal = GameObjects.closest("Portal", "Exit portal");
+                if (portal != null && portal.interact()) {
+                    Sleep.sleep(550, 2500);
+                    Sleep.sleepWhile(() -> Players.getLocal().isMoving(), 10000);
+
+                    if (Dialogues.inDialogue()
+                            && (Dialogues.getOptions() != null || Dialogues.canContinue())) {
+                        if (Calculations.random(10) > 2) {
+                            leave = false;
+                            RandomHandler.log("Something went wrong in the process, restarting...", "FreakyForesterSolver");
+                        } else {
+                            RandomHandler.log("Something went wrong in, let's bail", "FreakyForesterSolver");
+                            if (Dialogues.getOptions() != null & Dialogues.chooseFirstOptionContaining("leave", "Leave")) {
+                                Sleep.sleep(1550, 4500);
+                                Sleep.sleepWhile(() -> Client.getGameState().equals(GameState.LOADING), 10000);
+                            }
+                            leave = true;
+                            return 1;
+                        }
+                    }
+                    RandomHandler.log("And getting the hell out of here!", "FreakyForesterSolver");
+
+                    Sleep.sleep(350, 850);
+                    RandomHandler.increaseSolvedCount();
+                    return -1;
+                }
+            }
+            return 1;
+        }
+
         //Before entering Freak's realm
         if (!areaFreak.contains(Players.getLocal().getTile())) {
             if (Calculations.random(2) == 1) {
@@ -137,54 +187,6 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
             }
         }
 
-        if (areaFreak.contains(Players.getLocal().getTile()) && Inventory.contains("Raw pheasant") || leave) {
-            forester = NPCs.closest(372);
-            forester = (forester == null ? NPCs.closest("Freaky Forester") : forester);
-            RandomHandler.log("Talking to the freak...", "FreakyForesterSolver");
-            if (!leave) {
-                if (forester.interact()) {
-                    Sleep.sleep(550, 2500);
-                    Sleep.sleepWhile(() -> Players.getLocal().isMoving(), 5000);
-                    Sleep.sleepUntil(() -> Dialogues.getNPCDialogue() != null, 10000);
-                    RandomHandler.powerThroughDialogue();
-                    leave = true;
-                    Sleep.sleep(550, 2500);
-                }
-                if (Dialogues.inDialogue()
-                        && (Dialogues.getOptions() != null || Dialogues.canContinue())) {
-                    leave = false;
-                    RandomHandler.log("Something went wrong in the process, restarting...", "FreakyForesterSolver");
-                }
-            } else {
-                GameObject portal = GameObjects.closest("Portal", "Exit portal");
-                if (portal != null && portal.interact()) {
-                    Sleep.sleep(550, 2500);
-                    Sleep.sleepWhile(() -> Players.getLocal().isMoving(), 10000);
-
-                    if (Dialogues.inDialogue()
-                            && (Dialogues.getOptions() != null || Dialogues.canContinue())) {
-                        if (Calculations.random(10) > 2) {
-                            leave = false;
-                            RandomHandler.log("Something went wrong in the process, restarting...", "FreakyForesterSolver");
-                        } else {
-                            RandomHandler.log("Something went wrong in, let's bail", "FreakyForesterSolver");
-                            if (Dialogues.getOptions() != null & Dialogues.chooseFirstOptionContaining("leave", "Leave")) {
-                                Sleep.sleep(1550, 4500);
-                                Sleep.sleepWhile(() -> Client.getGameState().equals(GameState.LOADING), 10000);
-                            }
-                            leave = true;
-                            return 1;
-                        }
-                    }
-                    RandomHandler.log("And getting the hell out of here!", "FreakyForesterSolver");
-
-                    Sleep.sleep(350, 850);
-                    RandomHandler.increaseSolvedCount();
-                    return -1;
-                }
-            }
-            return 1;
-        }
 
         /*if (script.getScriptTile().distance() >= 45) {
             RandomHandler.log("Failed to solve Freaky Forester!", "FreakyForesterSolver");

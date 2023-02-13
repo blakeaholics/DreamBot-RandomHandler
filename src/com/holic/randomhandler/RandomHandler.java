@@ -19,7 +19,7 @@ import java.awt.*;
  * RandomHandler - A collection of random event solvers
  *
  * @author holic
- * @version 1.75
+ * @version 1.8
  * @url https://github.com/blakeaholics/DreamBot-RandomHandler
  */
 
@@ -194,6 +194,8 @@ public class RandomHandler {
                     log("Continuing dialogue");
                     Sleep.sleep(800, 3500);
                 }
+                if (Dialogues.areOptionsAvailable())
+                    return;
             }
         }
     }
