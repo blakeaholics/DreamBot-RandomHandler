@@ -95,10 +95,10 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
                     leave = true;
                     Sleep.sleep(550, 2500);
                 }
-                if (Dialogues.inDialogue() && (Dialogues.getOptions() != null || Dialogues.canContinue())) {
+                /*if (Dialogues.inDialogue() && (Dialogues.getOptions() != null || Dialogues.canContinue())) {
                     leave = false;
                     RandomHandler.log("Something went wrong in the process, restarting...", "FreakyForesterSolver");
-                }
+                }*/
             } else {
                 GameObject portal = GameObjects.closest("Portal", "Exit portal");
                 if (portal != null && portal.interact()) {

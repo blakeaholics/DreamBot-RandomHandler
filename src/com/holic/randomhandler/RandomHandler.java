@@ -19,7 +19,7 @@ import java.awt.*;
  * RandomHandler - A collection of random event solvers
  *
  * @author holic
- * @version 1.9
+ * @version 1.95
  * @url https://github.com/blakeaholics/DreamBot-RandomHandler
  */
 
