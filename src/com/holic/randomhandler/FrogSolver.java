@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class FrogSolver extends RandomSolver {
 
     private final Integer[] FROGS = {5903, 5429, 5901, 5900, 5899, 5902};
-    private final int MAIN_FROG = 5900;
+    private final int MAIN_FROG = 5902;
     private final Integer[] ROYAL_FROGS = {5434, 5435};
 
     public FrogSolver() {
