@@ -184,12 +184,12 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
         }
 
         //We have our target pheasant
-        if (areaFreak.contains(Players.getLocal().getTile()) && tailID > 0 && !Inventory.contains("Raw pheasant") && !leave) {
+        if (areaFreak.contains(Players.getLocal().getTile()) && tailID > 0 && !Inventory.contains("Raw pheasant") && !leave && !drop) {
             GroundItem rawPheasant = GroundItems.closest("Raw pheasant");
             if (rawPheasant == null) {
                 NPC pheasant = NPCs.closest(tailID);
-                RandomHandler.log("Killing pheasant", "FreakyForesterSolver");
                 if (pheasant != null && pheasant.interact()) {
+                    RandomHandler.log("Killing pheasant", "FreakyForesterSolver");
                     Sleep.sleep(550, 2500);
                     Sleep.sleepWhile(() -> pheasant != null && pheasant.exists(), 20000);
                 }
@@ -203,6 +203,12 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
                     Sleep.sleep(350, 850);
                     return 1;
                 }
+            }
+
+            if (Inventory.contains("Raw pheasant")) {
+                RandomHandler.log("Successfully obtained a pheasant corpse", "FreakyForesterSolver");
+                Sleep.sleep(50, 2500);
+                leave = true;
             }
         }
         return 1;

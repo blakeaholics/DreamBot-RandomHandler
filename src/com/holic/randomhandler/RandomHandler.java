@@ -19,7 +19,7 @@ import java.awt.*;
  * RandomHandler - A collection of random event solvers
  *
  * @author holic
- * @version 2.0
+ * @version 2.1
  * @url https://github.com/blakeaholics/DreamBot-RandomHandler
  */
 
@@ -28,6 +28,8 @@ public class RandomHandler {
     private static final int WIDGET_LAMP = 240;
     private static final int WIDGET_LAMP_ENTER = 26;
     private static int solvedCount = 0;
+    private static String status = "";
+    private static String prevStatus = "";
 
     public static void loadRandoms() {
         Client.getInstance().getRandomManager().disableSolver(RandomEvent.DISMISS);
@@ -207,12 +209,24 @@ public class RandomHandler {
         return solvedCount;
     }
 
-    public static void log(String msg, String solver) {
-        Logger.log(new Color(93, 180, 82), "[" + solver + "] " + msg);
+    public static void log(String stat, String solver) {
+        if (!getPrevStatus().equals(stat)) {
+            Logger.log(new Color(93, 180, 82), "[" + solver + "] " + stat);
+            setPrevStatus(stat);
+        }
+        status = stat;
+    }
+
+    public static String getPrevStatus() {
+        return prevStatus;
+    }
+
+    public static void setPrevStatus(String prevStat) {
+        prevStatus = prevStat;
     }
 
     public static void log(String msg) {
-        Logger.log(new Color(93, 180, 82), "[RandomHandler] " + msg);
+        log(msg, "RandomHandler");
     }
 
     enum Event {

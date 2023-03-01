@@ -67,7 +67,7 @@ public class BeekeeperSolver extends RandomSolver {
         NPC beeKeeper = NPCs.closest(beekeeperInstance, beekeeperOverworld);
         beeKeeper = (beeKeeper == null ? NPCs.closest("Beekeeper", "Bee keeper") : beeKeeper);
 
-        if (beeKeeper != null) {
+        if (NPCs.closest(beekeeperOverworld) != null) {
             RandomHandler.log("Bzzz bzzz bzzz", "BeekeeperSolver");
             if (Calculations.random(2) == 1) {
                 RandomHandler.log("Bzzz bzzz bzzz for " + ran + " bzzzs...", "BeekeeperSolver");
@@ -75,7 +75,7 @@ public class BeekeeperSolver extends RandomSolver {
             }
             Sleep.sleep(350, 850);
             if (/*!areaHives.contains(Players.getLocal().getTile())*/NPCs.closest(beekeeperInstance) == null && beeKeeper.interact()) {
-                RandomHandler.log("BZZZ!", "BeekeeperSolver");
+                RandomHandler.log("Honey time!", "BeekeeperSolver");
                 Sleep.sleep(1450, 2850);
                 Sleep.sleepUntil(Dialogues::inDialogue, 10000);
                 RandomHandler.powerThroughDialogue();
@@ -99,66 +99,71 @@ public class BeekeeperSolver extends RandomSolver {
                     return 1;
                 }
             }
-
-            if (NPCs.closest(beekeeperInstance) != null && NPCs.closest(beekeeperOverworld) == null/*areaHives.contains(Players.getLocal().getTile())*/) {
-                int successCount = 0;
-                if (Widgets.getWidget(WIDGET) != null && Widgets.getWidget(WIDGET).isVisible()) {
-                    int[] parts = {LID, ENTRANCE, BODY, LEGS};
-                    int[] pieces_int = {PIECE1, PIECE2, PIECE3, PIECE4};
-                    for (int piece : pieces_int) {
-                        WidgetChild object = Widgets.getChildWidget(WIDGET, piece);
-                        if (object != null) {
-                            for (int part : parts) {
-                                if (object.getDisabledMediaID() == part) {
-                                    String place = "";
-                                    if (part == LID) {
-                                        place = "Lid";
-                                    } else if (part == ENTRANCE) {
-                                        place = "Entrance";
-                                    } else if (part == BODY) {
-                                        place = "Body";
-                                    } else if (part == LEGS) {
-                                        place = "Legs";
-                                    }
-                                    List<WidgetChild> widgetChildrenContainingText = Widgets.getWidgetChildrenContainingText(place);
-                                    if (widgetChildrenContainingText.size() == 1) {
-                                        RandomHandler.log("Attempting to move part " + part + " to piece " + place, "BeekeeperSolver");
-                                        if (Mouse.move(object.getRectangle())) {
-                                            RandomHandler.log("Moving part " + part + " to piece " + place, "BeekeeperSolver");
+        }
+        if (NPCs.closest(beekeeperInstance) != null && NPCs.closest(beekeeperOverworld) == null/*areaHives.contains(Players.getLocal().getTile())*/) {
+            int successCount = 0;
+            if (Dialogues.inDialogue()) {
+                RandomHandler.powerThroughDialogue();
+                Sleep.sleep(1350, 2850);
+            }
+            if (Widgets.getWidget(WIDGET) != null && Widgets.getWidget(WIDGET).isVisible()) {
+                int[] parts = {LID, ENTRANCE, BODY, LEGS};
+                int[] pieces_int = {PIECE1, PIECE2, PIECE3, PIECE4};
+                for (int piece : pieces_int) {
+                    WidgetChild object = Widgets.getChildWidget(WIDGET, piece);
+                    if (object != null) {
+                        for (int part : parts) {
+                            if (object.getDisabledMediaID() == part) {
+                                String place = "";
+                                if (part == LID) {
+                                    place = "Lid";
+                                } else if (part == ENTRANCE) {
+                                    place = "Entrance";
+                                } else if (part == BODY) {
+                                    place = "Body";
+                                } else if (part == LEGS) {
+                                    place = "Legs";
+                                }
+                                List<WidgetChild> widgetChildrenContainingText = Widgets.getWidgetChildrenContainingText(place);
+                                if (widgetChildrenContainingText.size() == 1) {
+                                    RandomHandler.log("Attempting to move part " + part + " to piece " + place, "BeekeeperSolver");
+                                    if (Mouse.move(object.getRectangle())) {
+                                        RandomHandler.log("Moving part " + part + " to piece " + place, "BeekeeperSolver");
+                                        Sleep.sleep(350, 850);
+                                        if (Mouse.drag(widgetChildrenContainingText.get(0).getRectangle()))
                                             Sleep.sleep(350, 850);
-                                            if (Mouse.drag(widgetChildrenContainingText.get(0).getRectangle()))
-                                                Sleep.sleep(350, 850);
-                                            widgetChildrenContainingText = Widgets.getWidgetChildrenContainingText(place);
-                                            if (widgetChildrenContainingText.isEmpty()) {
-                                                RandomHandler.log("Successfully move " + place, "BeekeeperSolver");
-                                                successCount++;
-                                            }
+                                        widgetChildrenContainingText = Widgets.getWidgetChildrenContainingText(place);
+                                        if (widgetChildrenContainingText.isEmpty()) {
+                                            RandomHandler.log("Successfully move " + place, "BeekeeperSolver");
+                                            successCount++;
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                }
 
 
-                    if (successCount >= 4) {
-                        RandomHandler.log("Successfully moved all pieces!", "BeekeeperSolver");
-                        if (!Widgets.getWidgetChildrenContainingText("CONFIRM").isEmpty()) {
-                            if (!Widgets.getWidgetChildrenContainingText("CONFIRM").get(0).interact()) {
-                                Sleep.sleep(350, 1850);
-                                RandomHandler.increaseSolvedCount();
-                                return -1;
-                            }
+                if (successCount >= 4) {
+                    RandomHandler.log("Successfully moved all pieces!", "BeekeeperSolver");
+                    if (!Widgets.getWidgetChildrenContainingText("CONFIRM").isEmpty()) {
+                        if (!Widgets.getWidgetChildrenContainingText("CONFIRM").get(0).interact()) {
+                            Sleep.sleep(350, 1850);
+                            RandomHandler.increaseSolvedCount();
+                            return -1;
                         }
                     }
-                } else if (Dialogues.inDialogue()) {
-                    Sleep.sleep(1350, 2850);
-                    RandomHandler.powerThroughDialogue();
-                    Sleep.sleep(1350, 2850);
-                    return 1;
-
                 }
+            } else if (Dialogues.inDialogue()) {
+                Sleep.sleep(1350, 2850);
+                RandomHandler.powerThroughDialogue();
+                Sleep.sleep(1350, 2850);
+                return 1;
+
             }
+
+
         } else {
             return -1;
         }
