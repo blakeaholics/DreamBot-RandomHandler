@@ -105,6 +105,16 @@ public class BeekeeperSolver extends RandomSolver {
             if (Dialogues.inDialogue()) {
                 RandomHandler.powerThroughDialogue();
                 Sleep.sleep(1350, 2850);
+                if (Dialogues.inDialogue()) {
+                    RandomHandler.powerThroughDialogue();
+                    Sleep.sleep(1350, 2850);
+                    if (Arrays.stream(Dialogues.getOptions()).anyMatch(o -> o.toLowerCase().contains("Yeah"))) {
+                        Sleep.sleep(1450, 2850);
+                        Sleep.sleepUntil(Dialogues::canContinue, 10000);
+                        RandomHandler.powerThroughDialogue();
+                        Sleep.sleep(1350, 2850);
+                    }
+                }
             }
             if (Widgets.getWidget(WIDGET) != null && Widgets.getWidget(WIDGET).isVisible()) {
                 int[] parts = {LID, ENTRANCE, BODY, LEGS};
