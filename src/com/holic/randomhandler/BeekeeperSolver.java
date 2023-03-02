@@ -80,7 +80,7 @@ public class BeekeeperSolver extends RandomSolver {
                 Sleep.sleepUntil(Dialogues::inDialogue, 10000);
                 RandomHandler.powerThroughDialogue();
                 Sleep.sleep(1350, 2850);
-                if (Arrays.stream(Dialogues.getOptions()).anyMatch(o -> o.toLowerCase().contains("ooh"))) {
+                if (Arrays.stream(Dialogues.getOptions()).anyMatch(o -> o.toLowerCase().contains("Ooh"))) {
                     Sleep.sleep(1450, 2850);
                     Sleep.sleepUntil(Dialogues::canContinue, 10000);
                     RandomHandler.powerThroughDialogue();
@@ -91,7 +91,7 @@ public class BeekeeperSolver extends RandomSolver {
 
             if (/*!areaHives.contains(Players.getLocal().getTile())*/NPCs.closest(beekeeperInstance) == null && Dialogues.inDialogue()) {
                 Sleep.sleep(1350, 2850);
-                if (Arrays.stream(Dialogues.getOptions()).anyMatch(o -> o.toLowerCase().contains("ooh"))) {
+                if (Arrays.stream(Dialogues.getOptions()).anyMatch(o -> o.toLowerCase().contains("Ooh"))) {
                     Sleep.sleep(1450, 2850);
                     Sleep.sleepUntil(Dialogues::canContinue, 10000);
                     RandomHandler.powerThroughDialogue();
