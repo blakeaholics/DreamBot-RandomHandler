@@ -19,7 +19,7 @@ import java.awt.*;
  * RandomHandler - A collection of random event solvers
  *
  * @author holic
- * @version 2.2
+ * @version 2.3
  * @url https://github.com/blakeaholics/DreamBot-RandomHandler
  */
 
@@ -160,7 +160,11 @@ public class RandomHandler {
                             }
                             break;
                         default:
-                            skill = Client.isMembers() ? skills.getChild(Calculations.random(2, 24)) : skills.getChild(Calculations.random(2, 16));
+                            skill = Client.isMembers() ?
+                                    skills.getChild(Calculations.random(2, 24)) :
+                                    Calculations.random(2) == 1 ?
+                                            skills.getChild(Calculations.random(2, 9)) :
+                                            skills.getChild(Calculations.random(16, 21));
                     }
 
                     if (skill != null) {

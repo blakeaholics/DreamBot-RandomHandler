@@ -53,6 +53,11 @@ public class GenieSolver extends RandomSolver {
         if (genie != null) {
             RandomHandler.log("We've got a Genie!", "GenieSolver");
             Sleep.sleep(350, 850);
+            if (Inventory.isItemSelected()) {
+                RandomHandler.log("Oops, item is selected", "DismissSolver");
+                Inventory.deselect();
+                Sleep.sleep(350, 850);
+            }
             if (Calculations.random(2) == 1) {
                 RandomHandler.log("Delaying speaking to Genie by " + ran + " seconds", "GenieSolver");
                 Sleep.sleep(ran * 1000L);

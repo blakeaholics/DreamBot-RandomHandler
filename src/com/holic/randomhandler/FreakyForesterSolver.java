@@ -138,6 +138,11 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
                 Sleep.sleep(ran * 1000L);
             }
             Sleep.sleep(350, 850);
+            if (Inventory.isItemSelected()) {
+                RandomHandler.log("Oops, item is selected", "DismissSolver");
+                Inventory.deselect();
+                Sleep.sleep(350, 850);
+            }
         }
         if (!areaFreak.contains(Players.getLocal().getTile()) && forester.interact()) {
             Sleep.sleep(1450, 3850);

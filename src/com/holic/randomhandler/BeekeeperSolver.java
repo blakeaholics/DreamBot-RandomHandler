@@ -4,6 +4,7 @@ package com.holic.randomhandler;
 import org.dreambot.api.Client;
 import org.dreambot.api.input.Mouse;
 import org.dreambot.api.methods.Calculations;
+import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.dialogues.Dialogues;
 import org.dreambot.api.methods.interactive.NPCs;
 import org.dreambot.api.methods.interactive.Players;
@@ -74,6 +75,11 @@ public class BeekeeperSolver extends RandomSolver {
                 Sleep.sleep(ran * 1000L);
             }
             Sleep.sleep(350, 850);
+            if (Inventory.isItemSelected()) {
+                RandomHandler.log("Oops, item is selected", "DismissSolver");
+                Inventory.deselect();
+                Sleep.sleep(350, 850);
+            }
             if (/*!areaHives.contains(Players.getLocal().getTile())*/NPCs.closest(beekeeperInstance) == null && beeKeeper.interact()) {
                 RandomHandler.log("Honey time!", "BeekeeperSolver");
                 Sleep.sleep(1450, 2850);
