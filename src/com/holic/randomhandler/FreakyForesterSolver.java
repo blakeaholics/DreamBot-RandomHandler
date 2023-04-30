@@ -40,6 +40,7 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
     private int tailID = 0;
     private boolean leave = false;
     private boolean drop = false;
+    private int solveState = 0;
 
     public FreakyForesterSolver() {
         super("FreakyForesterSolver");
@@ -137,24 +138,25 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
                 RandomHandler.log("Ignoring the freak for " + ran + " seconds", "FreakyForesterSolver");
                 Sleep.sleep(ran * 1000L);
             }
-            Sleep.sleep(350, 850);
             if (Inventory.isItemSelected()) {
                 RandomHandler.log("Oops, item is selected", "DismissSolver");
+                Sleep.sleep(150, 850);
                 Inventory.deselect();
                 Sleep.sleep(350, 850);
             }
-        }
-        if (!areaFreak.contains(Players.getLocal().getTile()) && forester.interact()) {
-            Sleep.sleep(1450, 3850);
-            Sleep.sleepUntil(Dialogues::inDialogue, 10000);
-            RandomHandler.powerThroughDialogue();
-            if (Dialogues.chooseFirstOptionContaining("Okay")) {
-                Sleep.sleep(450, 1850);
-                RandomHandler.powerThroughDialogue();
+
+            if (forester.interact()) {
                 Sleep.sleep(1450, 3850);
+                Sleep.sleepUntil(Dialogues::inDialogue, 10000);
+                RandomHandler.powerThroughDialogue();
+                if (Dialogues.chooseFirstOptionContaining("Okay")) {
+                    Sleep.sleep(450, 1850);
+                    RandomHandler.powerThroughDialogue();
+                    Sleep.sleep(1450, 3850);
+                }
+                Sleep.sleep(2000, 5500);
+                Sleep.sleepWhile(() -> Client.getGameState().equals(GameState.LOADING), Calculations.random(8500, 11000));
             }
-            Sleep.sleep(2000, 5500);
-            Sleep.sleepWhile(() -> Client.getGameState().equals(GameState.LOADING), Calculations.random(8500, 11000));
         }
 
 
