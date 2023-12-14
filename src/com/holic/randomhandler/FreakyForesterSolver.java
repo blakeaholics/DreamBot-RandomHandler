@@ -68,6 +68,8 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
 
     @Override
     public int onLoop() {
+		if (Players.getLocal().isMoving())
+			Sleep.sleep(550, 2500);
         NPC forester = NPCs.closest(freakOverworld, freakInstance);
         forester = (forester == null ? NPCs.closest("Freaky Forester") : forester);
         if (drop) {
@@ -179,7 +181,9 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
                         } else if (tailFeathers.contains("four") || tailFeathers.contains("4")) {
                             feathers = 4;
                         }
-                        tailID = 5496 + feathers;
+                        List<NPC> npcs = NPCs.all(n-> n.getID() != freakInstance && n.getID() != freakOverworld);
+                        npcs.sort(Comparator.comparingInt(NPC::getID));
+                        tailID = npcs.get(feathers-1).getID();//5496 + feathers;
                         RandomHandler.log("Okay the freak wants " + feathers + "[ID:" + tailID + "] tail feathers", "FreakyForesterSolver");
 
                         return 1;
@@ -229,5 +233,8 @@ public class FreakyForesterSolver extends RandomSolver implements ChatListener {
         if (message.getMessage().contains("space")) {
             drop = true;
         }
+		if (message.getMessage().contains("want")) {
+			leave = false;
+		}
     }
 }
